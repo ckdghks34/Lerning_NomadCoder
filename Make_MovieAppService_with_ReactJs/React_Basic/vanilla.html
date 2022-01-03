@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- 1. 버튼 만들기(HTML)-->
+    <!-- 2. 버튼 가져오기(HTML -> JavaScript)-->
+    <!-- 3. 버튼 이벤트 등록-->
+    <!-- 3. 데이터 업데이트-->
+    <span>Total clicks : 0</span>
+    <button id="btn">Click me</button>
+  </body>
+  <script>
+    let count = 0;
+    const button = document.getElementById("btn");
+    const span = document.querySelector("span");
+    function handleClick() {
+      count++;
+      span.innerText = `Total clicks : ${count}`;
+    }
+    button.addEventListener("click", handleClick);
+  </script>
+</html>

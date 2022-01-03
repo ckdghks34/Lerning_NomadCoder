@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!--CDN 등록-->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script>
+    /* 해당 코드는
+      개발자들이 사용하는 방식은 아니고 Element를 만드는 방법(Hard)
+      어려운 방식을 살펴보며 React JS의 본질을 파악하기 위함.
+    */
+    /*
+      React JS는 엔진과 같다. Interactive한 UI를 만들 수 있게 함.
+      React Dom은 React Element를 body에 두는 역할
+    */
+
+    // Element 생성
+    // React.createElement("HTML태그") << 안에 생성하고자 하는 HTML 태그와 같은 이름을 넣어야한다.
+    // React.createElement("HTML태그", {property}, content_in_span)
+    // propert 안에 Event를 넣어서 이벤트를 등록할 수 있다.
+    const span = React.createElement(
+      "h3",
+      {
+        onMouseEnter: () => console.log("mouse enter"),
+      },
+      "Hello I'm sexy span"
+    );
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("i'm clicked"),
+        style: { backgroundColor: "tomato" },
+      },
+      "Click me"
+    );
+
+    // Element 등록
+    // Element를 body에 등록하기위해서 직접 HTML 코드 작성이 아닌 React-DOM을 사용한다.
+    // React-Dom은 모든 React Element들을 HTML body에 둘 수 있도록 해주는 Library or Package.
+    // React-Dom.render(Element, Element를 둘 위치)
+    const root = document.getElementById("root");
+
+    // span 과 btn 모두를 render하기 위해 div를 활용하여 생성한다.
+    const container = React.createElement("div", null, [span, btn]);
+
+    ReactDOM.render(container, root);
+  </script>
+</html>
