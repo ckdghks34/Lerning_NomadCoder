@@ -6,35 +6,59 @@
   <!--CDN 등록-->
   <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
     /* 해당 코드는
-      개발자들이 사용하는 방식은 아니고 Element를 만드는 방법(Hard)
-      어려운 방식을 살펴보며 React JS의 본질을 파악하기 위함.
-    */
+          개발자들이 사용하는 방식은 아니고 Element를 만드는 방법(Hard)
+          어려운 방식을 살펴보며 React JS의 본질을 파악하기 위함.
+        */
     /*
-      React JS는 엔진과 같다. Interactive한 UI를 만들 수 있게 함.
-      React Dom은 React Element를 body에 두는 역할
-    */
+          React JS는 엔진과 같다. Interactive한 UI를 만들 수 있게 함.
+          React Dom은 React Element를 body에 두는 역할
+        */
 
     // Element 생성
     // React.createElement("HTML태그") << 안에 생성하고자 하는 HTML 태그와 같은 이름을 넣어야한다.
     // React.createElement("HTML태그", {property}, content_in_span)
     // propert 안에 Event를 넣어서 이벤트를 등록할 수 있다.
-    const span = React.createElement(
-      "h3",
-      {
-        onMouseEnter: () => console.log("mouse enter"),
-      },
-      "Hello I'm sexy span"
-    );
-    const btn = React.createElement(
-      "button",
-      {
-        onClick: () => console.log("i'm clicked"),
-        style: { backgroundColor: "tomato" },
-      },
-      "Click me"
-    );
+
+    /*
+        const h3 = React.createElement(
+          "h3",
+          {
+            onMouseEnter: () => console.log("mouse enter"),
+          },
+          "Hello I'm sexy span"
+        );
+        */
+
+    // 컴포넌트의 첫글자는 반드시 대문자여야 한다.
+    // Why? 만약 소문자라면 React와 JSX는 HTML 태그라고 인식할 것
+    /*
+        function Title() {
+          return (
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+              Hello I'm a title
+            </h3>
+          );
+        }
+        */
+    /*
+        const Button = () => (
+          <button style={{ backgroundColor: "tomato" }} onClick={() => console.log("I'm clicked")}>
+            Click me
+          </button>
+        );
+        */
+    /*
+        const btn = React.createElement(
+          "button",
+          {
+            onClick: () => console.log("i'm clicked"),
+            style: { backgroundColor: "tomato" },
+          },
+          "Click me"
+        );*/
 
     // Element 등록
     // Element를 body에 등록하기위해서 직접 HTML 코드 작성이 아닌 React-DOM을 사용한다.
@@ -43,8 +67,55 @@
     const root = document.getElementById("root");
 
     // span 과 btn 모두를 render하기 위해 div를 활용하여 생성한다.
-    const container = React.createElement("div", null, [span, btn]);
+    // const container = React.createElement("div", null, [Title, Button]);
+    /*
+        const Container = (
+          <div>
+            <Title /> <Button />
+          </div>
+        );
+    */
+    // 데이터가 변할 때 렌더링
+    /*
+        let counter = 0;
+        function countUp() {
+          counter++;
+          render();
+        }
+        // 다시 Rendering을 하더라도 전부 새로 생성하는 것이 아니라 바뀐 부분만 다시 rendering된다.
+        function render() {
+          ReactDOM.render(<App />, root);
+        }
+        const App = () => (
+          <div>
+            <h3>Total clicks : {counter}</h3>
+            <button onClick={countUp}>Click me</button>
+          </div>
+        );
+        render();
+        */
+    const App = () => {
+      const data = React.useState(0);
+      // [undefined, function] 출력
+      // undefined : data, function : data를 변경할 때 사용하는 함수
+      // console.log(data);
 
-    ReactDOM.render(container, root);
+      // const counter = data[0];
+      // const modifier = data[1];
+      // 아래와 같음
+      const [counter, setCounter] = data;
+      const onClick = () => {
+        // data가 바뀌면 자동으로 Rerendering 함.
+        setCounter(counter + 1);
+      };
+
+      return (
+        <div>
+          <h3>Total clicks : {counter}</h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, root);
   </script>
 </html>
