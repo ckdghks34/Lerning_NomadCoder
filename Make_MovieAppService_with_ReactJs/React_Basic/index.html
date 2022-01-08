@@ -95,7 +95,7 @@
         render();
         */
     const App = () => {
-      const data = React.useState(0);
+      // const data = React.useState(0);
       // [undefined, function] 출력
       // undefined : data, function : data를 변경할 때 사용하는 함수
       // console.log(data);
@@ -103,11 +103,23 @@
       // const counter = data[0];
       // const modifier = data[1];
       // 아래와 같음
-      const [counter, setCounter] = data;
+      const [counter, setCounter] = React.useState(0);
       const onClick = () => {
         // data가 바뀌면 자동으로 Rerendering 함.
-        setCounter(counter + 1);
+
+        // 1번
+        // setCounter(counter + 1);
+
+        //2번
+        setCounter((current) => current + 1);
+        // 위 코드는 같은 것을 의미한다.
+        // 아래에 있는 코드와 같이 함수형태가 더욱 안정적이다.
+        // why? 현재 값이라는걸 보장하고 있기 때문에. 정확히 원하는 값으로 계산할 수 있다.
       };
+
+      // state를 바꾸는 자기방법이있음.
+      // 1. setCouter를 이용하여 바꿀수 있다.
+      // 2. 이전값을 이용해서 바꾸는 방법
 
       return (
         <div>
