@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!--CDN 등록-->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // function SaveBtn() {
+    //   return (
+    //     <button
+    //       style={{
+    //         backgroundColor: "tomato",
+    //         color: "white",
+    //         padding: "10px 20px",
+    //         border: 0,
+    //         borderRadius: 10,
+    //       }}
+    //     >
+    //       SaveChanges
+    //     </button>
+    //   );
+    // }
+    // function ConfirmBtn() {
+    //   return (
+    //     <button
+    //       style={{
+    //         backgroundColor: "tomato",
+    //         color: "white",
+    //         padding: "10px 20px",
+    //         border: 0,
+    //         borderRadius: 10,
+    //       }}
+    //     >
+    //       Confirm
+    //     </button>
+    //   );
+    // }
+
+    // 전달인자를 Props 라고 한다.
+    // Btn으로 전달받는 Properties이다.
+    // props는 첫번째이자 유일한 전달인자이다.
+    // props는 Object이다.
+    // function Btn(props) {
+    //   console.log(props);
+    //   return (
+    //     <button
+    //       style={{
+    //         backgroundColor: "tomato",
+    //         color: "white",
+    //         padding: "10px 20px",
+    //         border: 0,
+    //         borderRadius: 10,
+    //       }}
+    //     >
+    //       {props.text}
+    //     </button>
+    //   );
+    // }
+
+    // props를 전달받아 사용하는 것과 같으나 ShortCut(지름길)
+    // props.~~ 대신 ~~으로 바로 사용가능
+    function Btn({ text, big }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? "20px" : "12px",
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Btn text="Save Changes" big={true} />
+          <Btn text="Continue" big={false} />
+        </div>
+      );
+    }
+    // Btn({text:"save Changes"}) == <Btn text="Save Changes"/>
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
