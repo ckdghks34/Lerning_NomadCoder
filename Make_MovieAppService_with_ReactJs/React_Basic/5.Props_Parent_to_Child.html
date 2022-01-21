@@ -62,16 +62,17 @@
 
     // props를 전달받아 사용하는 것과 같으나 ShortCut(지름길)
     // props.~~ 대신 ~~으로 바로 사용가능
-    function Btn({ text, big }) {
+    function Btn({ text, changeValue }) {
       return (
         <button
+          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? "20px" : "12px",
+            fontSize: 10,
           }}
         >
           {text}
@@ -79,11 +80,22 @@
       );
     }
 
+    // 아래 코드에서 onClick은 실제의 EventListener가 아니라 Btn으로 가는 Props이다.
+    // <Btn text={value} onClick={changeValue}/>
+
+    // state가 바뀌면 자동으로 re-render를 하게 된다.
+    // 따라서 Continue 버튼도 다시 render가 되고있음.
+    // React memo를 사용하면 state의 변경이 없는 것은 다시 render를 하지 않는다.
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("RevertChanges");
+      };
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <MemorizedBtn text={value} changeValue={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
