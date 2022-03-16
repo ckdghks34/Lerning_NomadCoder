@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Lerning_NomadCoder.git/static/js/main.7735a1b0.js",
-    "index.html": "/Lerning_NomadCoder.git/index.html",
-    "main.7735a1b0.js.map": "/Lerning_NomadCoder.git/static/js/main.7735a1b0.js.map"
+    "main.js": "/Lerning_NomadCoder/static/js/main.323e81ee.js",
+    "index.html": "/Lerning_NomadCoder/index.html",
+    "main.323e81ee.js.map": "/Lerning_NomadCoder/static/js/main.323e81ee.js.map"
   },
   "entrypoints": [
-    "static/js/main.7735a1b0.js"
+    "static/js/main.323e81ee.js"
   ]
 }
